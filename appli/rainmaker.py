@@ -12,7 +12,7 @@ class Vanne():
         self.mode = 'off'
         self.sortie = self.check_output()
         self.prog = {}
-        self.actif = {}
+        self.actif = []
 
     def change_mode(self, mode):
         """modifie le mode de Vanne ('on, 'off', prog')"""
@@ -53,10 +53,15 @@ class Vanne():
     def active_p(self, prog):
         if prog == 'all':
             for elem in self.prog['nom']:
-                self.actif.setdefault(elem, True)
+                self.actif.append(elem)
         elif prog in self.prog.keys():
-           
-            self.actif.setdefault(prog, True)
+            self.actif.append(prog)
+
+    def inactive_p(self, prog):
+        if prog == 'all':
+            self.actif.clear()      
+        elif prog in self.actif:
+            self.actif.remove(prog)
 
 class Program():
     week = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
@@ -127,13 +132,16 @@ if __name__ == '__main__':
     p1 = Program('p1')
     p2 = Program('p2')
     p3 = Program('p3')
-    v1.add_p(p1)
     v1.add_p(p2)
+    v1.add_p(p1)
     v1.add_p(p3)
     print(v1)
     p1.modif('start',21,55)
-    v1.active_p('p1')
     v1.active_p('p2')
+    v1.active_p('p1')
+    print(v1)
+    v1.inactive_p('p15')
+    v1.del_p('p4')
     print(v1)
     """
     print(p1)
