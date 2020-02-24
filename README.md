@@ -1,2 +1,3 @@
 # projet_rainmaker_mt
-rainmaker multi-threads
+new rainmaker version with external sqlite db
+
