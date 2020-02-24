@@ -1,3 +1,3 @@
-# projet_rainmaker_mt
+# projet_rainmaker
 new rainmaker version with external sqlite db
 
